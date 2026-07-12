@@ -41,4 +41,5 @@ src/       可复用代码
 - M6：bootstrap CI、重要性解释、MAF 敏感性、乐观偏差、交付报告
 - 本地报告：`reports/tables/FINAL_DELIVERY_REPORT.md`
 - 一键复现：`bash scripts/run_all_pipeline.sh`
+- 缺口补齐：`m7_*` + `infer_g2p.py`（holdout/RR-BLUP/RouteA/推理）
 

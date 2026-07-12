@@ -29,3 +29,7 @@ run scripts/m6c_final_delivery.py
 
 echo "ALL PIPELINE COMPLETE"
 echo "See reports/tables/FINAL_DELIVERY_REPORT.md"
+run scripts/m7_wheat_holdout_rrblup.py
+run scripts/m7_shap_fdr.py
+run scripts/m7_maize_routeA.py
+run scripts/m7_export_inference_models.py

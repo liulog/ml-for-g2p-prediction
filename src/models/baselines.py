@@ -1,9 +1,9 @@
-"""Baseline genomic prediction models."""
+"""Explicit genomic prediction models including RR-BLUP."""
 from __future__ import annotations
 
 import numpy as np
 from lightgbm import LGBMRegressor
-from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import ElasticNet, Ridge
 from sklearn.model_selection import KFold
 
 from src.evaluation.metrics import regression_metrics
@@ -47,6 +47,27 @@ class GBLUP:
         assert self.K_ is not None and self.alpha_ is not None and self.train_idx_ is not None
         K_pt = self.K_[np.ix_(np.asarray(pred_idx, dtype=int), self.train_idx_)]
         return K_pt @ self.alpha_ + self.mu_
+
+
+class RRBLUP:
+    """Ridge regression on marker dosages (RR-BLUP)."""
+
+    def __init__(self, alpha: float = 100.0) -> None:
+        self.alpha = float(alpha)
+        self.model = Ridge(alpha=self.alpha, fit_intercept=True)
+        self.mu_: np.ndarray | None = None
+        self.sd_: np.ndarray | None = None
+
+    def fit(self, X: np.ndarray, y: np.ndarray) -> "RRBLUP":
+        self.mu_ = X.mean(axis=0)
+        self.sd_ = X.std(axis=0)
+        self.sd_[self.sd_ < 1e-8] = 1.0
+        self.model.fit((X - self.mu_) / self.sd_, y)
+        return self
+
+    def predict(self, X: np.ndarray) -> np.ndarray:
+        assert self.mu_ is not None and self.sd_ is not None
+        return self.model.predict((X - self.mu_) / self.sd_)
 
 
 def choose_gblup_h2(

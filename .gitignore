@@ -1,0 +1,40 @@
+# Docs (local planning / contracts; not versioned)
+docs/
+
+# Raw datasets
+wheat1k/
+trainingcleandata/
+*.vcf
+*.bed
+*.bim
+*.fam
+*.zip
+
+# Experiment outputs
+results/
+reports/
+
+# Intermediate / processed data artifacts
+data/interim/**
+data/processed/**
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/interim/wheat/.gitkeep
+!data/interim/maize/.gitkeep
+!data/processed/wheat/.gitkeep
+!data/processed/maize/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+
+# Matplotlib / IDE / OS
+.mplconfig/
+.DS_Store
+*.swp
+.idea/
+.vscode/

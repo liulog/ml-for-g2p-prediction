@@ -1,0 +1,20 @@
+name: g2p
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - pyyaml
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn
+  - pyarrow
+  - lightgbm
+  - statsmodels
+  - joblib
+  - optuna
+  - tqdm
+  - pip

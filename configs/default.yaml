@@ -1,0 +1,81 @@
+# G2P default experiment config
+# Random seed and all primary paths / trait lists live here.
+
+project:
+  name: g2p
+  seed: 2026
+  random_state: 2026
+
+paths:
+  wheat_vcf: wheat1k/Wheat1k.recode.vcf
+  wheat_pheno: wheat1k/wheat1k.pheno.txt
+  maize_plink_prefix: trainingcleandata/step4_hwe_skipped_351841SNPs
+  maize_pheno: trainingcleandata/3_phenotype_final_4269.csv
+  maize_env: trainingcleandata/env_weather_daily_raw.csv
+  interim: data/interim
+  processed: data/processed
+  reports: reports
+  results: results
+
+wheat:
+  sample_id_col: sample
+  # Full trait list from local phenotype header (15 traits)
+  all_traits:
+    - spikelength
+    - spikelet
+    - lodging
+    - kernelspikelet
+    - height
+    - headingdate
+    - gns
+    - FHB
+    - cold
+    - yield
+    - tkw
+    - tiller
+    - sterilspike
+    - FD
+    - Mature
+  # First executable iteration (plan §15)
+  pilot_traits:
+    - yield
+    - height
+    - headingdate
+    - tkw
+  near_zero_var_cv_threshold: 0.05
+
+maize:
+  genotype_id_col_fam: iid  # PLINK .fam column 2
+  genotype_id_col_pheno: Hybrid
+  genotype_id_alt_col: Hybrid_orig_name
+  environment_id_col_pheno: Env
+  environment_id_col_env: env
+  primary_trait: Yield_Mg_ha
+  secondary_traits:
+    - Plant_Height_cm
+    - Ear_Height_cm
+    - Pollen_DAP_days
+    - Silk_DAP_days
+
+qc:
+  mind: 0.10          # sample missingness
+  geno: 0.10          # SNP missingness
+  maf: 0.01
+  maf_alt: 0.05
+  ld_window: 50
+  ld_step: 5
+  ld_r2: 0.2
+  ld_r2_alt: 0.5
+  skip_hwe: true      # breeding / inbred populations
+
+cv:
+  n_splits: 5
+  n_repeats: 5
+  test_size_holdout: 0.15
+
+models:
+  pilot:
+    - mean
+    - gblup
+    - elastic_net
+    - lightgbm

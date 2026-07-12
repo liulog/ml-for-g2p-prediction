@@ -70,7 +70,7 @@ qc:
 
 cv:
   n_splits: 5
-  n_repeats: 5
+  n_repeats: 2          # pilot runtime; raise to 5 for final reporting
   test_size_holdout: 0.15
 
 models:

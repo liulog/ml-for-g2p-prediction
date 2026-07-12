@@ -35,5 +35,7 @@ src/       可复用代码
 
 ## 当前阶段
 
-- **M0**：环境与数据契约
-- 下一步：**M1** 数据审计与样本对齐
+- **小麦 M0–M3 已完成**：审计 → QC → LD/PCA/GRM → 试点基线 → 特征对比 → 15 性状 + SNP 稳定性
+- 本地汇总：`reports/tables/WHEAT_M3_SUMMARY.md`（不入 git）
+- 一键复现：`bash scripts/run_wheat_pipeline.sh`
+- 下一步：玉米 G×E（M4+）

@@ -35,8 +35,10 @@ src/       可复用代码
 
 ## 当前阶段
 
-- **小麦 M0–M3 已完成**：审计 → QC → LD/PCA/GRM → 试点基线 → 特征对比 → 15 性状 + SNP 稳定性
-- **玉米 M4–M5 已完成**：G/P/E 对齐 → 表型校正 → 环境特征/PCA → 基因型 PCA → Yield G/E/G×E 基线（leave-genotype / leave-environment / leave-year）
-- 本地汇总：`reports/tables/WHEAT_M3_SUMMARY.md`；指标见 `results/metrics/`（不入 git）
-- 小麦复现：`bash scripts/run_wheat_pipeline.sh`
-- 玉米复现：`python scripts/m4a_maize_align.py && python scripts/m4b_maize_phenotype_adjust.py && python scripts/m4c_maize_env_features.py && python scripts/m4d_maize_genotype_pca.py && python scripts/m5_maize_gxe_baselines.py`
+- **全项目 M0–M6 已完成**
+- 小麦：审计 → QC → 基线/特征/15 性状
+- 玉米：对齐 → 环境/基因型表征 → Yield G/E/G×E → 次要性状
+- M6：bootstrap CI、重要性解释、MAF 敏感性、乐观偏差、交付报告
+- 本地报告：`reports/tables/FINAL_DELIVERY_REPORT.md`
+- 一键复现：`bash scripts/run_all_pipeline.sh`
+

@@ -258,13 +258,19 @@ def main() -> int:
     for trait in traits:
         for scheme in ["random_repeated", "kinship_group"]:
             sub = summary[(summary.trait == trait) & (summary.scheme == scheme)]
-            mean_r = float(sub.loc[sub.model == "mean", "pearson_r_mean"].iloc[0])
-            best = sub.loc[sub.model != "mean"].sort_values("pearson_r_mean", ascending=False).iloc[0]
+            mean_rmse = float(sub.loc[sub.model == "mean", "rmse_mean"].iloc[0])
+            cand = sub.loc[sub.model != "mean"].copy()
+            # prefer higher pearson; fall back to lower rmse
+            cand = cand.sort_values(["pearson_r_mean", "rmse_mean"], ascending=[False, True])
+            best = cand.iloc[0]
+            best_r = best["pearson_r_mean"]
+            best_rmse = float(best["rmse_mean"])
             gate["beats_mean"][f"{trait}|{scheme}"] = {
-                "mean_r": mean_r,
+                "mean_rmse": mean_rmse,
                 "best_model": best["model"],
-                "best_r": float(best["pearson_r_mean"]),
-                "pass": bool(best["pearson_r_mean"] > mean_r + 0.05),
+                "best_r": None if pd.isna(best_r) else float(best_r),
+                "best_rmse": best_rmse,
+                "pass": bool(best_rmse < mean_rmse),
             }
     with open(metrics_dir / "wheat_pilot_m2_gate.json", "w") as f:
         json.dump(gate, f, indent=2)

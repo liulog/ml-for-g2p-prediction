@@ -35,11 +35,10 @@ src/       可复用代码
 
 ## 当前阶段
 
-- **全项目 M0–M6 已完成**
-- 小麦：审计 → QC → 基线/特征/15 性状
-- 玉米：对齐 → 环境/基因型表征 → Yield G/E/G×E → 次要性状
-- M6：bootstrap CI、重要性解释、MAF 敏感性、乐观偏差、交付报告
+- **计划核心 M0–M8 已完成**（BayesA/B/C、天气序列、多任务、Optuna 等为可选扩展）
+- 小麦：审计 → QC → 基线/特征/15 性状 → holdout/RR-BLUP → BayesianRidge/ARD → GWAS±PC → 多种子
+- 玉米：对齐 → 环境/基因型表征 → G/E/G×E → 均值/反应规范/双塔 → leave-both / leave-location
+- M6–M7：bootstrap CI、重要性、FDR、Route A、推理脚本
 - 本地报告：`reports/tables/FINAL_DELIVERY_REPORT.md`
 - 一键复现：`bash scripts/run_all_pipeline.sh`
-- 缺口补齐：`m7_*` + `infer_g2p.py`（holdout/RR-BLUP/RouteA/推理）
 

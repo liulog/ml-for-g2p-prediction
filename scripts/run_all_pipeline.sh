@@ -33,3 +33,10 @@ run scripts/m7_wheat_holdout_rrblup.py
 run scripts/m7_shap_fdr.py
 run scripts/m7_maize_routeA.py
 run scripts/m7_export_inference_models.py
+
+# M8: plan remainder (Bayes-style, PC ablation, advanced GxE, leave-location, multi-seed)
+run scripts/m8_wheat_bayes.py
+run scripts/m8_wheat_pc_ablation.py
+run scripts/m8_maize_advanced_gxe.py
+run scripts/m8_maize_leave_location.py
+run scripts/m8_seed_sensitivity.py
